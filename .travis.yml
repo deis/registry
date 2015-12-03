@@ -1,0 +1,21 @@
+sudo: required
+language: go
+go:
+  - 1.5.1
+branches:
+  only:
+    - master
+services:
+  - docker
+env:
+  # HACK(bacongobbler): make travis tests work
+  - DEIS_REGISTRY=travis-ci
+install:
+  - make docker-build
+script:
+  - make test
+deploy:
+  provider: script
+  script: contrib/ci/deploy.sh
+  on:
+    branch: master
