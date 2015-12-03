@@ -7,10 +7,36 @@ This Docker image is based on the official docker distribution image.
 Please add any [issues](https://github.com/deis/registry/issues) you find with this software to the [Distribution Project](https://github.com/docker/distribution).
 
 
-## Usage
+## Deploying
 
-Please consult the [Makefile](Makefile) for current instructions on how to build, test, push, install, and start deis/registry.
+To build a dev release of this image, you will also need your own registry, but DockerHub or Quay will do fine here. To build, run:
 
+```
+$ export DEIS_REGISTRY=myregistry.com:5000
+$ make docker-build docker-push
+```
+
+This will compile the Docker image and push it to your registry.
+
+After that, run
+
+```
+$ make deploy
+```
+
+Which will deploy the component to kubernetes. After a while, you should see one pod up with one running:
+
+```
+NAME                  READY     STATUS    RESTARTS   AGE
+registry-6wy8o        1/1       Running   0          32s
+```
+
+You can then query this pod as you would with any other Kubernetes pod:
+
+```
+$ kubectl logs -f registry-6wy8o
+$ kubectl exec -it registry-6wy8o psql
+```
 
 ## License
 
