@@ -27,7 +27,7 @@ build:
 # For cases where we're building from local
 # We also alter the RC file to set the image name.
 docker-build: check-docker
-	docker build --rm -t ${IMAGE} rootfs
+	docker build --rm -t ${IMAGE} .
 
 # Push to a registry that Kubernetes can access.
 docker-push: check-docker check-registry
