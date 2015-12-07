@@ -14,7 +14,7 @@ DEIS_REGISTRY ?= ${DEV_REGISTRY}
 IMAGE_PREFIX ?= deis/
 
 # Kubernetes-specific information for RC, Service, and Image.
-RC := contrib/kubernetes/manifests/${SHORT_NAME}-rc.tmp.yaml
+RC := contrib/kubernetes/manifests/${SHORT_NAME}-rc.yaml
 SVC := contrib/kubernetes/manifests/${SHORT_NAME}-service.yaml
 IMAGE := ${DEIS_REGISTRY}/${IMAGE_PREFIX}${SHORT_NAME}:${BUILD_TAG}
 
