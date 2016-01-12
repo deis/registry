@@ -1,4 +1,4 @@
-FROM alpine:3.2
+FROM alpine:3.3
 
 ENV DOCKER_REGISTRY_TAG=v2.2.0 \
     DOCKER_REGISTRY_REPO=https://github.com/docker/distribution.git
