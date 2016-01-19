@@ -1,10 +1,14 @@
 # Registry
 
+[![Build Status](https://travis-ci.org/deis/registry.svg?branch=master)](https://travis-ci.org/deis/registry)
+
 A Docker image registry for use in the Deis open source PaaS.
 
-This Docker image is based on the official docker distribution image.
+This Docker image is based on alpine linux and uses the official Docker V2 registry code.
 
-Please add any [issues](https://github.com/deis/registry/issues) you find with this software to the [Distribution Project](https://github.com/docker/distribution).
+Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and manage
+applications on your own servers. Deis builds on [Kubernetes](http://kubernetes.io/) to provide
+a lightweight, [Heroku-inspired](http://heroku.com) workflow.
 
 ## Deploying
 
