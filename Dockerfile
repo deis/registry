@@ -21,5 +21,4 @@ COPY rootfs/ /
 # define the execution environment
 VOLUME ["/var/lib/registry"]
 EXPOSE 5000
-ENTRYPOINT ["/bin/registry"]
-CMD ["/etc/docker/registry/config.yml"]
+CMD ["/opt/registry/sbin/registry"]

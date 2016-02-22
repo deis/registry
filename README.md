@@ -44,6 +44,20 @@ Before deploying your custom image you must update the container image specifica
               value: "true"
 ```
 
+By default registry uses the filesystem as the storage medium. To use a custom object store like s3 or gcs:
+- First provide the details required for authenticating to object store in base64 format by updating the secret file which can be found at `contrib/kubernetes/manifests/registry-{STORAGE_TYPE}-secret.yaml`.
+- Set the STORAGE_TYPE environment variable.
+```
+$ export STORAGE_TYPE = {s3/gcs}
+```
+- Update the secret to be used in the pod manifest. This file is found at `contrib/kubernetes/manifests/registry-rc.yaml`:
+```yaml
+        - name: registry-creds
+          secret:
+            secretName: fs-keyfile
+```
+
+
 Once updated, deploy the registry to your kubernetes cluster with:
 
 ```
