@@ -1,7 +1,8 @@
 FROM alpine:3.3
 
-ENV DOCKER_REGISTRY_TAG=v2.2.1 \
-    DOCKER_REGISTRY_REPO=https://github.com/docker/distribution.git
+ENV DOCKER_REGISTRY_TAG=v2.3.0 \
+    DOCKER_REGISTRY_REPO=https://github.com/docker/distribution.git \
+    DOCKER_BUILDTAGS=include_gcs
 
 # install registry binaries
 RUN export DISTRIBUTION_DIR=/go/src/github.com/docker/distribution \
