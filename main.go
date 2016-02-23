@@ -49,6 +49,25 @@ func main() {
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_BUCKET", string(bucket))
 		}
+	} else if storageType == "azure" {
+		if accountname, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/accountname"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_AZURE_ACCOUNTNAME", string(accountname))
+		}
+
+		if accountkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/accountkey"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_AZURE_ACCOUNTKEY", string(accountkey))
+		}
+
+		if container, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/container"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_AZURE_CONTAINER", string(container))
+		}
+
 	}
 
 	cmd := exec.Command(registryBinary, registryConfig)
