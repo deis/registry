@@ -25,7 +25,7 @@ func main() {
 		} else {
 			os.Setenv("REGISTRY_STORAGE_GCS_BUCKET", string(bucket))
 		}
-	} else if storageType == "s3" {
+	} else if storageType == "generic" {
 		if accesskey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/accesskey"); err != nil {
 			log.Fatal(err)
 		} else {
