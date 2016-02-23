@@ -19,11 +19,18 @@ spec:
               value: "true"
             - name: REGISTRY_LOG_LEVEL
               value: info
+            - name: REGISTRY_STORAGE
+              value: filesystem
           ports:
             - containerPort: 5000
           volumeMounts:
             - name: registry-storage
               mountPath: /var/lib/registry
+            - name: registry-creds
+              mountPath: /var/run/secrets/deis/registry/creds
       volumes:
         - name: registry-storage
           emptyDir: {}
+        - name: registry-creds
+          secret:
+            secretName: fs-keyfile
