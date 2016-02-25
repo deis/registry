@@ -1,7 +1,7 @@
 FROM alpine:3.3
 
-ENV DOCKER_REGISTRY_TAG=radosgw \
-    DOCKER_REGISTRY_REPO=https://github.com/kmala/distribution.git \
+ENV DOCKER_REGISTRY_TAG=minio \
+    DOCKER_REGISTRY_REPO=https://github.com/deis/distribution.git \
     DOCKER_BUILDTAGS=include_gcs
 
 # install registry binaries
