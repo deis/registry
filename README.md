@@ -1,14 +1,35 @@
-# Registry
+# Deis Registry v2
 
 [![Build Status](https://travis-ci.org/deis/registry.svg?branch=master)](https://travis-ci.org/deis/registry)
+[![Go Report Card](http://goreportcard.com/badge/deis/registry)](http://goreportcard.com/report/deis/registry)
+[![Docker Repository on Quay](https://quay.io/repository/deisci/registry/status "Docker Repository on Quay")](https://quay.io/repository/deisci/registry)
 
-A Docker image registry for use in the Deis open source PaaS.
-
-This Docker image is based on alpine linux and uses the official Docker V2 registry code.
 
 Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and manage
 applications on your own servers. Deis builds on [Kubernetes](http://kubernetes.io/) to provide
 a lightweight, [Heroku-inspired](http://heroku.com) workflow.
+
+## Beta Status
+
+This Deis component is currently in beta status, and we welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
+
+# About
+
+The registry is a [Docker registry](https://docs.docker.com/registry/) component for use in Kubernetes. While it's intended for use inside of the Deis open source [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), it's flexible enough to be used as a standalone pod on any Kubernetes cluster.
+
+If you decide to use this component standalone, you can host your own Docker registry in your own Kubernetes cluster.
+
+The Docker image that this repository builds is based on [Alpine Linux](http://www.alpinelinux.org/) and uses [the Deis fork](https://github.com/deis/distribution) of [the official Docker v2 registry code](https://github.com/docker/distribution).
+
+# Development
+
+The Deis project welcomes contributions from all developers. The high level process for development matches many other open source projects. See below for an outline.
+
+* Fork this repository
+* Make your changes
+* Submit a pull request (PR) to this repository with your changes, and unit tests whenever possible.
+	* If your PR fixes any issues, make sure you write Fixes #1234 in your PR description (where #1234 is the number of the issue you're closing)
+* The Deis core contributors will review your code. After each of them sign off on your code, they'll label your PR with LGTM1 and LGTM2 (respectively). Once that happens, the contributors will merge it
 
 ## Deploying
 
@@ -82,8 +103,11 @@ $ kubectl exec -it registry-6wy8o sh
 
 ## License
 
-© 2014 Engine Yard, Inc.
+© 2014, 2015, 2016 Engine Yard, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+[issues]: https://github.com/deis/registry/issues
+[prs]: https://github.com/deis/registry/pulls
