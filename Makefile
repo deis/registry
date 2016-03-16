@@ -1,12 +1,10 @@
-include includes.mk
-
 # Short name: Short name, following [a-zA-Z_], used all over the place.
 # Some uses for short name:
 # - Docker image name
 # - Kubernetes service, rc, pod, secret, volume names
 SHORT_NAME := registry
 
-VERSION ?= git-$(shell git rev-parse --short HEAD)
+include includes.mk versioning.mk
 
 # the filepath to this repository, relative to $GOPATH/src
 REPO_PATH = github.com/deis/registry
@@ -22,9 +20,6 @@ BINDIR := ./rootfs/opt/registry/sbin
 # Legacy support for DEV_REGISTRY, plus new support for DEIS_REGISTRY.
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 
-IMAGE_PREFIX ?= deis
-
-
 ifeq ($(STORAGE_TYPE),)
   STORAGE_TYPE = fs
 endif
@@ -33,7 +28,6 @@ endif
 SECRET := contrib/kubernetes/manifests/${SHORT_NAME}-${STORAGE_TYPE}-secret.yaml
 RC := contrib/kubernetes/manifests/${SHORT_NAME}-rc.yaml
 SVC := contrib/kubernetes/manifests/${SHORT_NAME}-service.yaml
-IMAGE := ${DEIS_REGISTRY}${IMAGE_PREFIX}/${SHORT_NAME}:${VERSION}
 
 all:
 	@echo "Use a Makefile to control top-level building of the project."
@@ -46,6 +40,7 @@ build: check-docker
 # We also alter the RC file to set the image name.
 docker-build: check-docker build
 	docker build --rm -t ${IMAGE} .
+	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
 
 # Push to a registry that Kubernetes can access.
 docker-push: check-docker check-registry
