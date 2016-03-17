@@ -24,7 +24,7 @@ func main() {
 			log.Fatal("Service account not given")
 		}
 		os.Setenv("REGISTRY_STORAGE_GCS_KEYFILE", "/var/run/secrets/deis/registry/creds/key.json")
-		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/bucket"); err != nil {
+		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-bucket"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_GCS_BUCKET", string(bucket))
@@ -49,7 +49,7 @@ func main() {
 			os.Setenv("REGISTRY_STORAGE_S3_REGION", string(region))
 		}
 
-		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/bucket"); err != nil {
+		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-bucket"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_BUCKET", string(bucket))
@@ -68,7 +68,7 @@ func main() {
 			os.Setenv("REGISTRY_STORAGE_AZURE_ACCOUNTKEY", string(accountkey))
 		}
 
-		if container, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/container"); err != nil {
+		if container, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-container"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_AZURE_CONTAINER", string(container))
@@ -82,13 +82,13 @@ func main() {
 		os.Setenv("REGISTRY_STORAGE_S3_BACKEND", "minio")
 		os.Setenv("REGISTRY_STORAGE_S3_REGIONENDPOINT", fmt.Sprintf("http://%s:%s", mHost, mPort))
 
-		if accesskey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/access-key-id"); err != nil {
+		if accesskey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/accesskey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_ACCESSKEY", string(accesskey))
 		}
 
-		if secretkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/access-secret-key"); err != nil {
+		if secretkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/secretkey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_SECRETKEY", string(secretkey))
