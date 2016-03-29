@@ -102,12 +102,10 @@ func main() {
 	cmd := exec.Command(registryBinary, registryConfig)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	if err := cmd.Start(); err != nil {
+	if err := cmd.Run(); err != nil {
 		log.Fatal("Error starting the registry", err)
 	}
 	log.Println("INFO: registry started.")
-	for {
-	}
 }
 
 func getenv(name, dfault string) string {
