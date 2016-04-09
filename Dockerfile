@@ -1,8 +1,7 @@
 FROM alpine:3.3
 
 ENV DOCKER_REGISTRY_TAG=minio \
-    DOCKER_REGISTRY_REPO=https://github.com/deis/distribution.git \
-    DOCKER_BUILDTAGS=include_gcs
+    DOCKER_REGISTRY_REPO=https://github.com/deis/distribution.git
 
 # install registry binaries
 RUN export DISTRIBUTION_DIR=/go/src/github.com/docker/distribution \
