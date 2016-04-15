@@ -1,3 +1,19 @@
+### v2.0.0-beta1 -> v2.0.0-beta2
+
+#### Features
+
+ - [`f289d97`](https://github.com/deis/registry/commit/f289d97e0fb5a82e7911e17e6e1f58d9c83f0436) _scripts: add CHANGELOG.md and generator script
+
+#### Fixes
+
+ - [`0bf4735`](https://github.com/deis/registry/commit/0bf473551e02d976d34294641ca154ae99e5a1b4) storage: make changes to support the object storage secret
+ - [`586f97c`](https://github.com/deis/registry/commit/586f97c420fc77936d9421d32901d7a612f1f192) perf: fix the high cpu utilization of the registry
+
+#### Maintenance
+
+ - [`93d8fb2`](https://github.com/deis/registry/commit/93d8fb23c9b8db6588a2ce25f3bdab814c74b87d) Dockerfile: remove include_gcs build tag
+ - [`158a686`](https://github.com/deis/registry/commit/158a686c3d60ed542b74a92519b18bdfa35c884e) Makefile: update go-dev to 0.10.0 and compress registry binary
+
 ### 2.0.0-alpha -> v2.0.0-beta1
 
 #### Features
