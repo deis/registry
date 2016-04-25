@@ -44,7 +44,7 @@ docker-build: check-docker build
 	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
 
 # Push to a registry that Kubernetes can access.
-docker-push: check-docker check-registry
+docker-push: check-docker
 	docker push ${IMAGE}
 
 build-binary:
