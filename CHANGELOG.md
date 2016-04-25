@@ -1,3 +1,13 @@
+### v2.0.0-beta2 -> v2.0.0-beta3
+
+#### Fixes
+
+ - [`8af10a2`](https://github.com/deis/registry/commit/8af10a28d73704e8817edb98aa36be35dd0cc3b2) Makefile: remove includes.mk
+
+#### Maintenance
+
+ - [`96e38cf`](https://github.com/deis/registry/commit/96e38cf90a22428668dabd8bf5ddfb365b5a55c6) .travis.yml: Deep six the travis -> jenkins webhooks
+
 ### v2.0.0-beta1 -> v2.0.0-beta2
 
 #### Features
