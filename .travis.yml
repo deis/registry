@@ -14,3 +14,8 @@ install:
   - make docker-build
 script:
   - make test
+deploy:
+  provider: script
+  script: _scripts/deploy.sh
+  on:
+    branch: master
