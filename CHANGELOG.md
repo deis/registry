@@ -1,3 +1,7 @@
+### Testing mention-bot here
+
+You can ignore this change, it's temporary.
+
 ### v2.0.0-beta3 -> v2.0.0-beta4
 
 #### Documentation
@@ -15,6 +19,11 @@
  - [`96e38cf`](https://github.com/deis/registry/commit/96e38cf90a22428668dabd8bf5ddfb365b5a55c6) .travis.yml: Deep six the travis -> jenkins webhooks
 
 ### v2.0.0-beta1 -> v2.0.0-beta2
+
+### More testing
+
+Begging your indulgence, please ignore this useless change as it will soon disappear.
+This is simply to test whether https://github.com/facebook/mention-bot could be useful for us.
 
 #### Features
 
