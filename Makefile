@@ -40,7 +40,7 @@ build: check-docker
 # For cases where we're building from local
 # We also alter the RC file to set the image name.
 docker-build: check-docker build
-	docker build --rm -t ${IMAGE} .
+	docker build --rm -t ${IMAGE} rootfs
 	docker tag -f ${IMAGE} ${MUTABLE_IMAGE}
 
 # Push to a registry that Kubernetes can access.
@@ -48,9 +48,9 @@ docker-push: check-docker
 	docker push ${IMAGE}
 
 build-binary:
-	${DEV_ENV_PREFIX} -e CGO_ENABLED=0 ${DEV_ENV_IMAGE} go build -a -installsuffix cgo -ldflags ${LDFLAGS} -o $(BINDIR)/${SHORT_NAME} main.go
+	${DEV_ENV_CMD} go build -ldflags ${LDFLAGS} -o $(BINDIR)/${SHORT_NAME} main.go
 	$(call check-static-binary,$(BINDIR)/${SHORT_NAME})
-	${DEV_ENV_PREFIX} ${DEV_ENV_IMAGE} upx -9 --brute $(BINDIR)/${SHORT_NAME}
+	${DEV_ENV_CMD} upx -9 --brute $(BINDIR)/${SHORT_NAME}
 
 # Deploy is a Kubernetes-oriented target
 deploy: kube-secret kube-service kube-rc
