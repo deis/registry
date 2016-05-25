@@ -1,3 +1,9 @@
+### v2.0.0-beta4 -> v2.0.0-rc1
+
+#### Maintenance
+
+ - [`33c45cb`](https://github.com/deis/registry/commit/33c45cbaf69311c4f43aaf84cf993514adb181db) Dockerfile: Refactor image to use ubuntu-slim
+
 ### v2.0.0-beta3 -> v2.0.0-beta4
 
 #### Documentation
