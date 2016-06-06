@@ -9,9 +9,7 @@ Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy an
 applications on your own servers. Deis builds on [Kubernetes](http://kubernetes.io/) to provide
 a lightweight, [Heroku-inspired](http://heroku.com) workflow.
 
-## Beta Status
-
-This Deis component is currently in beta status, and we welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
+We welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
 
 # About
 
@@ -71,7 +69,7 @@ By default registry uses the filesystem as the storage medium. To use a custom o
 ```yaml
         - name: REGISTRY_STORAGE
           value: filesystem
-          
+
         - name: registry-creds
           secret:
             secretName: fs-keyfile
