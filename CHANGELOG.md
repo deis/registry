@@ -1,3 +1,13 @@
+### v2.0.0-rc2 -> v2.0.0
+
+#### Documentation
+
+- [`afc9d2a`](https://github.com/deis/registry/commit/afc9d2a54a1248aef380de5b99ce8fd2ce0b0ad8) CHANGELOG.md: add entry for v2.0.0-rc2
+
+#### Maintenance
+
+- [`9cd3013`](https://github.com/deis/registry/commit/9cd3013ba05160ffda907217febcb3e351a5e57f) README.md: remove beta status
+
 ### v2.0.0-rc1 -> v2.0.0-rc2
 
 ### v2.0.0-beta4 -> v2.0.0-rc1
