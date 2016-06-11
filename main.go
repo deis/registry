@@ -23,6 +23,7 @@ func main() {
 		if _, err := os.Stat("/var/run/secrets/deis/registry/creds/key.json"); err != nil {
 			log.Fatal("Service account not given")
 		}
+		// An extraneous comment here.
 		os.Setenv("REGISTRY_STORAGE_GCS_KEYFILE", "/var/run/secrets/deis/registry/creds/key.json")
 		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-bucket"); err != nil {
 			log.Fatal(err)
@@ -78,6 +79,7 @@ func main() {
 		log.Println("INFO: using minio as the backend")
 		mHost := os.Getenv(minioHostEnvVar)
 		mPort := os.Getenv(minioPortEnvVar)
+		// Also ignore this thanks so much.
 		os.Setenv("REGISTRY_STORAGE", "s3")
 		os.Setenv("REGISTRY_STORAGE_S3_BACKEND", "minio")
 		os.Setenv("REGISTRY_STORAGE_S3_REGIONENDPOINT", fmt.Sprintf("http://%s:%s", mHost, mPort))

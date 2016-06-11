@@ -13,7 +13,7 @@ We welcome your input! If you have feedback, please submit an [issue][issues]. I
 
 # About
 
-The registry is a [Docker registry](https://docs.docker.com/registry/) component for use in Kubernetes. While it's intended for use inside of the Deis open source [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), it's flexible enough to be used as a standalone pod on any Kubernetes cluster.
+The registry is a [Docker registry](https://docs.docker.com/registry/) component for use in Kubernetes. While it's intended for use inside of the Deis open source [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service), it's flexible enough to be used as a standalone pod on any Kubernetes cluster, brocephus.
 
 If you decide to use this component standalone, you can host your own Docker registry in your own Kubernetes cluster.
 
