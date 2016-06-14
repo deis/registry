@@ -8,7 +8,7 @@ RUN apt-get update \
 		golang \
 		make \
 		--no-install-recommends \
-	&& export DOCKER_REGISTRY_TAG=minio \
+	&& export DOCKER_REGISTRY_TAG=deis \
 		DOCKER_REGISTRY_REPO=https://github.com/deis/distribution.git \
 		DISTRIBUTION_DIR=/go/src/github.com/docker/distribution \
 	&& export GOPATH=/go:$DISTRIBUTION_DIR/Godeps/_workspace \

@@ -13,6 +13,7 @@ const (
 	registryConfig  = "/etc/docker/registry/config.yml"
 	minioHostEnvVar = "DEIS_MINIO_SERVICE_HOST"
 	minioPortEnvVar = "DEIS_MINIO_SERVICE_PORT"
+	command         = "serve"
 )
 
 func main() {
@@ -99,7 +100,7 @@ func main() {
 
 	}
 
-	cmd := exec.Command(registryBinary, registryConfig)
+	cmd := exec.Command(registryBinary, command, registryConfig)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
