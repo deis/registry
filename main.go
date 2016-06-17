@@ -98,6 +98,44 @@ func main() {
 		os.Setenv("REGISTRY_STORAGE_S3_REGION", "us-east-1")
 		os.Setenv("REGISTRY_STORAGE_S3_BUCKET", "registry")
 
+	} else if storageType == "swift" {
+		log.Println("INFO: using swift as the backend")
+		if authurl, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/authurl"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_AUTHURL", string(authurl))
+		}
+
+		if username, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/username"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_USERNAME", string(username))
+		}
+
+		if password, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/password"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_PASSWORD", string(password))
+		}
+
+		if container, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-container"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_CONTAINER", string(container))
+		}
+
+		if authVersion, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/authversion"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_AUTHVERSION", string(authVersion))
+		}
+
+		if tenant, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/tenant"); err != nil {
+			log.Fatal(err)
+		} else {
+			os.Setenv("REGISTRY_STORAGE_SWIFT_TENANT", string(tenant))
+		}
+
 	}
 
 	cmd := exec.Command(registryBinary, command, registryConfig)
