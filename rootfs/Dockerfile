@@ -27,5 +27,3 @@ RUN apt-get update \
 VOLUME ["/var/lib/registry"]
 CMD ["/opt/registry/sbin/registry"]
 EXPOSE 5000
-
-ENV WORKFLOW_RELEASE 2.0.0
