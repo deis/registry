@@ -1,0 +1,15 @@
+{{- if eq .Values.global.registry_location "on-cluster" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: deis-registry
+  labels:
+    heritage: deis
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+  selector:
+    app: deis-registry
+{{- end }}
