@@ -61,12 +61,12 @@ spec:
           volumeMounts:
             - name: registry-storage
               mountPath: /var/lib/registry
-            - name: registry-creds
+            - name: objectstorage-creds
               mountPath: /var/run/secrets/deis/registry/creds
       volumes:
         - name: registry-storage
           emptyDir: {}
-        - name: registry-creds
+        - name: objectstorage-creds
           secret:
-            secretName: registry-storage-keyfile
+            secretName: objectstorage-keyfile
 {{- end }}
