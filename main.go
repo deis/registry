@@ -29,6 +29,7 @@ func main() {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_GCS_BUCKET", string(bucket))
+			os.Setenv("BUCKET_NAME", string(bucket))
 		}
 	} else if storageType == "s3" {
 		log.Println("INFO: using s3 as the backend")
@@ -36,24 +37,28 @@ func main() {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_ACCESSKEY", string(accesskey))
+			os.Setenv("AWS_ACCESS_KEY_ID", string(accesskey))
 		}
 
 		if secretkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/secretkey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_SECRETKEY", string(secretkey))
+			os.Setenv("AWS_SECRET_ACCESS_KEY", string(secretkey))
 		}
 
 		if region, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/region"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_REGION", string(region))
+			os.Setenv("AWS_REGION", string(region))
 		}
 
 		if bucket, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/registry-bucket"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_BUCKET", string(bucket))
+			os.Setenv("BUCKET_NAME", string(bucket))
 		}
 	} else if storageType == "azure" {
 		log.Println("INFO: using azure as the backend")
@@ -73,6 +78,7 @@ func main() {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_AZURE_CONTAINER", string(container))
+			os.Setenv("BUCKET_NAME", string(container))
 		}
 
 	} else if storageType == "minio" {
@@ -82,21 +88,29 @@ func main() {
 		os.Setenv("REGISTRY_STORAGE", "s3")
 		os.Setenv("REGISTRY_STORAGE_S3_BACKEND", "minio")
 		os.Setenv("REGISTRY_STORAGE_S3_REGIONENDPOINT", fmt.Sprintf("http://%s:%s", mHost, mPort))
+		// NOTE(bacongobbler): custom envvars used in /bin/create-bucket
+		os.Setenv("S3_HOST", mHost)
+		os.Setenv("S3_PORT", mPort)
+		os.Setenv("S3_USE_SIGV4", "true")
 
 		if accesskey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/accesskey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_ACCESSKEY", string(accesskey))
+			os.Setenv("AWS_ACCESS_KEY_ID", string(accesskey))
 		}
 
 		if secretkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/secretkey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_SECRETKEY", string(secretkey))
+			os.Setenv("AWS_SECRET_ACCESS_KEY", string(secretkey))
 		}
 
 		os.Setenv("REGISTRY_STORAGE_S3_REGION", "us-east-1")
+		os.Setenv("AWS_REGION", "us-east-1")
 		os.Setenv("REGISTRY_STORAGE_S3_BUCKET", "registry")
+		os.Setenv("BUCKET_NAME", "registry")
 
 	} else if storageType == "swift" {
 		log.Println("INFO: using swift as the backend")
@@ -138,11 +152,19 @@ func main() {
 
 	}
 
-	cmd := exec.Command(registryBinary, command, registryConfig)
+	// run /bin/create-bucket
+	cmd := exec.Command("/bin/create-bucket")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
-		log.Fatal("Error starting the registry", err)
+		log.Fatal("Error creating the registry bucket: ", err)
+	}
+
+	cmd = exec.Command(registryBinary, command, registryConfig)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		log.Fatal("Error starting the registry: ", err)
 	}
 	log.Println("INFO: registry started.")
 }
