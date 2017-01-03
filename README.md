@@ -17,7 +17,7 @@ The registry is a [Docker registry](https://docs.docker.com/registry/) component
 
 If you decide to use this component standalone, you can host your own Docker registry in your own Kubernetes cluster.
 
-The Docker image that this repository builds is based on [Alpine Linux](http://www.alpinelinux.org/) and uses [the Deis fork](https://github.com/deis/distribution) of [the official Docker v2 registry code](https://github.com/docker/distribution).
+The Docker image that this repository builds is based on [the official Docker v2 registry image](https://github.com/docker/distribution).
 
 # Development
 
@@ -53,50 +53,10 @@ To build and push the image run:
 $ make docker-build docker-push
 ```
 
-Before deploying your custom image you must update the container image specification in the pod manifest. This file is found at `contrib/kubernetes/manifests/registry-rc.yaml`:
+To deploy the image via patching the registry deployment run:
 
-```yaml
-        - name: registry
-          image: quay.io/youruser/registry:git-f5c7dc3
-          env:
-            - name: REGISTRY_STORAGE_DELETE_ENABLED
-              value: "true"
-```
-
-By default registry uses the filesystem as the storage medium. To use a custom object store like s3, gcs or azure:
-- First provide the details required for authenticating to object store in base64 format by updating the secret file which can be found at `contrib/kubernetes/manifests/registry-{STORAGE_TYPE}-secret.yaml`.
-- Update the storage type and secret to be used in the pod manifest. This file is found at `contrib/kubernetes/manifests/registry-rc.yaml`:
-```yaml
-        - name: REGISTRY_STORAGE
-          value: filesystem
-
-        - name: registry-creds
-          secret:
-            secretName: fs-keyfile
-```
-- Set the STORAGE_TYPE environment variable.
-```
-$ export STORAGE_TYPE = {s3/gcs/azure}
-```
-
-Once updated, deploy the registry to your kubernetes cluster with:
-
-```
+```console
 $ make deploy
-```
-
-After a while, you should see one pod up with one running:
-
-```
-NAME                  READY     STATUS    RESTARTS   AGE
-registry-6wy8o        1/1       Running   0          32s
-```
-
-You can then interact with this pod as you would with any other Kubernetes pod:
-
-```
-$ kubectl logs -f registry-6wy8o
-$ kubectl exec -it registry-6wy8o sh
 ```
 
 ## License
