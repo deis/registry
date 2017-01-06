@@ -53,7 +53,7 @@ elif os.getenv('REGISTRY_STORAGE') == "swift":
         tenant_name=os.getenv('REGISTRY_STORAGE_SWIFT_TENANT')
     )
     # swift also does not throw exception if container already exists.
-    conn.put_container(os.getenv('BUCKET_NAME'))
+    conn.put_container(bucket_name)
 
 elif os.getenv('REGISTRY_STORAGE') == "s3" and os.getenv('REGISTRY_STORAGE_S3_BACKEND') == 'minio':
     botoconfig.add_section('s3')
