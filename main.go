@@ -136,6 +136,7 @@ func main() {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_SWIFT_CONTAINER", string(container))
+			os.Setenv("BUCKET_NAME", string(container))
 		}
 
 		if authVersion, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/authversion"); err != nil {
