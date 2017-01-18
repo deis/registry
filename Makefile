@@ -35,7 +35,7 @@ build: check-docker
 # For cases where we're building from local
 # We also alter the RC file to set the image name.
 docker-build: check-docker build
-	docker build --rm -t ${IMAGE} rootfs
+	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
 build-binary:
