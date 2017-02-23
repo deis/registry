@@ -25,7 +25,11 @@ if os.getenv('REGISTRY_STORAGE') == "s3" and os.getenv('REGISTRY_STORAGE_S3_BACK
     conn = boto.s3.connect_to_region(region)
 
     if not bucket_exists(conn, bucket_name):
-        conn.create_bucket(bucket_name, location=region)
+        if region == "us-east-1":
+            # use "US Standard" region. workaround for https://github.com/boto/boto3/issues/125
+            conn.create_bucket(bucket_name)
+        else:
+            conn.create_bucket(bucket_name, location=region)
 
 elif os.getenv('REGISTRY_STORAGE') == "gcs":
     scopes = ['https://www.googleapis.com/auth/devstorage.full_control']
