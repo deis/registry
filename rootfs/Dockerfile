@@ -1,4 +1,4 @@
-FROM registry:2.5.1
+FROM registry:2.6.0
 
 RUN apk add --no-cache \
         python3 && \
