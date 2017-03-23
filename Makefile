@@ -9,6 +9,8 @@ include includes.mk versioning.mk
 # the filepath to this repository, relative to $GOPATH/src
 REPO_PATH = github.com/deis/registry
 
+SHELL_SCRIPTS = $(wildcard _scripts/*.sh contrib/ci/*.sh)
+
 # The following variables describe the containerized development environment
 # and other build options
 DEV_ENV_IMAGE := quay.io/deis/go-dev:0.20.0
@@ -43,10 +45,13 @@ build-binary:
 	$(call check-static-binary,$(BINDIR)/${SHORT_NAME})
 	${DEV_ENV_CMD} upx -9 --brute $(BINDIR)/${SHORT_NAME}
 
-test: check-docker
+test: check-docker test-style
 	contrib/ci/test.sh ${IMAGE}
+
+test-style:
+	${DEV_ENV_CMD} shellcheck $(SHELL_SCRIPTS)
 
 deploy: check-kubectl docker-build docker-push
 	kubectl --namespace=deis patch deployment deis-$(SHORT_NAME) --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"$(IMAGE)"}]'
 
-.PHONY: all build build-binary docker-build test deploy
+.PHONY: all build build-binary docker-build test test-style deploy
