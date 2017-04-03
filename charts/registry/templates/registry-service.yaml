@@ -12,4 +12,5 @@ spec:
       targetPort: 5000
   selector:
     app: deis-registry
+  sessionAffinity: ClientIP  
 {{- end }}
