@@ -1,6 +1,6 @@
 # Deis Registry v2
 
-[![Build Status](https://travis-ci.org/deis/registry.svg?branch=master)](https://travis-ci.org/deis/registry)
+[![Build Status](https://ci.deis.io/job/registry/badge/icon)](https://ci.deis.io/job/registry)
 [![Go Report Card](https://goreportcard.com/badge/github.com/deis/registry)](https://goreportcard.com/report/github.com/deis/registry)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/registry/status "Docker Repository on Quay")](https://quay.io/repository/deisci/registry)
 
