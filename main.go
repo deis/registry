@@ -37,14 +37,18 @@ func main() {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_ACCESSKEY", string(accesskey))
-			os.Setenv("AWS_ACCESS_KEY_ID", string(accesskey))
+			if len(accesskey) != 0 {
+				os.Setenv("AWS_ACCESS_KEY_ID", string(accesskey))
+			}
 		}
 
 		if secretkey, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/secretkey"); err != nil {
 			log.Fatal(err)
 		} else {
 			os.Setenv("REGISTRY_STORAGE_S3_SECRETKEY", string(secretkey))
-			os.Setenv("AWS_SECRET_ACCESS_KEY", string(secretkey))
+			if len(secretkey) != 0 {
+				os.Setenv("AWS_SECRET_ACCESS_KEY", string(secretkey))
+			}
 		}
 
 		if region, err := ioutil.ReadFile("/var/run/secrets/deis/registry/creds/region"); err != nil {
